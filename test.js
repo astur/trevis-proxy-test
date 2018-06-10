@@ -1,7 +1,8 @@
 const test = require('ava');
-const m = require('.');
+const scra = require('scra');
 
-test('trevis-proxy-test', t => {
-    t.true(true);
-    t.is(m, m);
+test('trevis-proxy-test', async t => {
+    await scra({url: 'httpbin.org/ip', proxy: 'localhost:3128'}).then(res => {
+        t.is(res.statusCode, 200);
+    });
 });
